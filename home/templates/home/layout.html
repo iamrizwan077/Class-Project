@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="{% static 'home/favicon.ico' %}">
+  <link href="{% static 'home/layout.css' %}" rel="stylesheet">
+  <title>FoodLo</title>
+</head>
+<body>
+
+  <!-- In block body, don't write anything -->
+  <!-- Write only those parts in this file that would be same in all -->
+
+  <header class= "headpc">
+    <div class="headlogo">FoodLo</div>
+    <div>
+      <ul class="headitems">
+        <li><a>Home</a></li>
+        <li><a>Products</a> </li>
+        <li><a>About</a></li>
+      </ul>
+    </div>
+  </header>
+  {% block body %}
+  
+  {% endblock %}
+
+  
+</body>
+</html>

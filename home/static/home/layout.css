@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
+
+:root{
+  font-family: 'Niconne', cursive;
+}
+body{
+  margin: 0;
+}
+
+.headpc{
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+  color:#EEE;
+  align-items:center;
+}
+
+.headlogo{
+  font-size: 2rem;
+  padding-left: 0.5rem;
+}
+.headitems{
+  list-style-type:none;
+  font-size: 1.5rem;
+  display: flex;
+  margin:0;
+}
+.headitems li{
+  padding: 0.5rem 1rem;
+}
+a{
+  cursor: pointer;
+}
