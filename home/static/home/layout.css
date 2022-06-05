@@ -1,33 +1,140 @@
 @import url('https://fonts.googleapis.com/css2?family=Niconne&display=swap');
 
-:root{
-  font-family: 'Niconne', cursive;
-}
-body{
-  margin: 0;
-}
-
-.headpc{
-  display: flex;
-  justify-content: space-between;
-  background-color: #333;
-  color:#EEE;
-  align-items:center;
+:root {
+    --primaryBackgroundColor: #fcde67;
+    --primaryTextColor: #030e12;
+    --primaryButtonColor: #5bccf6;
 }
 
-.headlogo{
-  font-size: 2rem;
-  padding-left: 0.5rem;
+* {
+    font-family: 'Roboto Mono', monospace;
 }
-.headitems{
-  list-style-type:none;
-  font-size: 1.5rem;
-  display: flex;
-  margin:0;
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
 }
-.headitems li{
-  padding: 0.5rem 1rem;
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-a{
-  cursor: pointer;
+
+.container {
+    display: flex;
+}
+
+/* Header */
+
+.logo {
+    cursor: pointer;
+}
+
+.mainHeader {
+    padding: 10px 35px;
+    font-size: x-large;
+    justify-content: space-between;
+  
+    background-color: var(--primaryBackgroundColor);
+    align-items: center;
+}
+
+.mainHeader p span {
+    color: var(--primaryButtonColor);
+}
+
+.navbar {
+    width: 70%;
+    justify-content: space-between;
+}
+
+.navbar ul li a {
+    color: var(--primaryTextColor);
+    text-decoration: none;
+    transition: all 0.5s ease 0s;
+}
+
+.navbar li a:hover {
+    color: white;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.nav-right {
+    width: 23%;
+    justify-content: space-between;
+}
+
+.nav-left {
+    width: 40%;
+    justify-content: space-between;
+}
+
+.hpgbtn {
+    text-align: center;
+    height: 100%;
+    width: 13%;
+    /* background: #0C2D48; */
+    background-color: var(--primaryButtonColor);
+    border-radius: 25px;
+    color: var(--primaryTextColor);
+    padding: 5px;
+    font-size: large;
+    margin: auto;
+    transition: all 0.5s ease 0s;
+    text-decoration: none;
+}
+
+.orderNow:hover {
+    background: var(--primaryBackgroundColor);
+    color: var(--primaryButtonColor);
+}
+
+/* Footer */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    height: auto;
+    width: 100vw;
+    background-color: var(--primaryBackgroundColor);
+}
+
+.footerContent {
+    display: flex;
+    align-items: center;
+    /* flex-direction: column; */
+    justify-content: space-evenly;
+}
+
+.socialIcon {
+    transform: scale(1.5);
+    color: var(--primaryTextColor);
+    padding: 7px;
+    margin: 30px 15px;
+    border: 1px solid var(--primaryTextColor);
+    border-radius: 18px;
+}
+
+.footer img {
+    transform: scale(0.5);
+}
+
+.footerText {
+    color: var(--primaryTextColor);
+    text-align: center;
+}
+
+.footerMap {
+    margin-top: 25px;
+    padding: 8px;
+    width: 26%;
+}
+
+.footerMap a {
+    color: var(--primaryTextColor);
+    text-decoration: none;
 }

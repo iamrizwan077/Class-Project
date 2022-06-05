@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="{% static 'home/favicon.ico' %}">
   <link href="{% static 'home/layout.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>FoodLo</title>
 </head>
 <body>
@@ -15,19 +16,59 @@
   <!-- In block body, don't write anything -->
   <!-- Write only those parts in this file that would be same in all -->
 
-  <header class= "headpc">
-    <div class="headlogo">FoodLo</div>
-    <div>
-      <ul class="headitems">
-        <li><a>Home</a></li>
-        <li><a>Products</a> </li>
-        <li><a>About</a></li>
-      </ul>
-    </div>
-  </header>
+      <div id="page_container">
+        <!-- Header -->
+        <header class="mainHeader container">
+            <!-- Header Left -- Logo -->
+            <p class="logo">Food<span>Lo</span><i class="fa-solid fa-pepper-hot"></i> </p>
+            <!-- Header Right -- Navigation Links -->
+            <nav class="container navbar">
+                <!-- Nav Left -->
+                <ul class="nav-left container">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Gallery</a></li>
+                </ul>
+                <!-- Order Now Link -->
+                <a class="orderNow hpgbtn" href="">Order Now</a>
+                <!-- Nav Right -->
+                <ul class="nav-right container">
+                    <li><a href="">Cart </a><i class="logo fas fa-shopping-cart"></i></li>
+                    <li><a href="">Login </a><i class="logo fas fa-user-plus"></i></li>
+                </ul>
+            </nav>
+        </header>
+
   {% block body %}
   
   {% endblock %}
+
+
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footerContent">
+                <!-- Social Links -->
+                <div class="socialLinks">
+                    <a href="https://www.facebook.com/" target="_blank"><i class="socialIcon fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank"><i class="socialIcon fa-brands fa-instagram"></i></a>
+                    <a href="https://www.twitter.com/" target="_blank"><i class="socialIcon fa-brands fa-twitter"></i></a>
+                    <a href="https://www.tiktok.com/" target="_blank"><i class="socialIcon fa-brands fa-tiktok"></i></a>
+                </div>
+                <img src="https://i.ibb.co/5sd7wVq/Food-Lo-Logo.png" alt="Food-Lo-Logo" class="footerLogo">
+                <div class="footerText">
+                    <div class="footerDetails">
+                        <p>FoodLo Restaurant | C-219, F.B.Area, Karachi, Pakistan | Telephone: 9221-6325403</p>
+                    </div>
+                    <div class="footerRightsText">
+                        <p>Copyright &copy; 2022 FoodLo pk | All Rights Reserved</p>
+                    </div>
+                    <div class="footerMap hpgbtn">
+                        <a href="https://goo.gl/maps/9vvuMtQwjatYXTdt6" target='_blank'><i class="fa-solid fa-location-dot"></i> Find Us On Map</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
   
 </body>
