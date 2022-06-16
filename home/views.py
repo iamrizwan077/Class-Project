@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
+from .models import Users
 from django.contrib.auth import authenticate,login
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -22,6 +23,11 @@ def register(request):
       )
       
       if new_user is not None:
+        Users.username=username
+        Users.password=password
+        Users.username.save_form_data(username)
+        Users.password.save_form_data(password)
+        new_user.save()
         login(request,new_user)
         return redirect('home/index.html')
       
@@ -35,3 +41,11 @@ def register(request):
 
 def login(request):
   return render(request, "registration/login.html")
+
+def about(request):
+    return render(request, "home/about.html")
+
+
+
+def products(request):
+    return render(request, "home/products.html")
