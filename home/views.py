@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
-from .models import Users
+from .models import Users, Product
 from django.contrib.auth import authenticate,login
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -48,4 +48,9 @@ def about(request):
 
 
 def products(request):
-    return render(request, "home/products.html")
+    return render(request, "home/products.html",{
+      "name": Product.foodname,
+      "image": Product.foodimg,
+      "desc":Product.fooddesc,
+      "price": Product.price
+    })

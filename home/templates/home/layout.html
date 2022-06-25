@@ -8,8 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="{% static 'home/favicon.ico' %}">
     <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'home/layout.css' %}">
-      <link rel="stylesheet" href="{% static 'home/index.css' %}">    <link rel="stylesheet" href="{% static 'home/about.css' %}">    <link rel="stylesheet" href="{% static 'home/products.css' %}">
+      <link rel="stylesheet" href="{% static 'home/layout.css' %}">
+      <link rel="stylesheet" href="{% static 'home/index.css' %}">    
+      <link rel="stylesheet" href="{% static 'home/about.css' %}">    
+      <link rel="stylesheet" href="{% static 'home/products.css' %}">
     <!-- Fonts Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Fonts -->
@@ -35,10 +37,10 @@
             <button class="close-btn"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <ul class="links">
-            <li><a href="/home">Home</a></li>
-            <li><a href="/home/about">About</a></li>
+            <li><a href="{% url 'home' %}" >Home</a></li>
+            <li><a href="{% url 'about' %}" >About</a></li>
             <li><a href="/home#gallery">Gallery</a></li>
-            <li><a href="/home/products">Order Now</a></li>
+            <li><a href="{% url 'products' %}" >Order Now</a></li>
         </ul>
         <div class="cart-btn-wrapper">
             <a href="" class="cart">Cart <i class="fas fa-shopping-cart"></i></a>
@@ -50,14 +52,14 @@
 
     <header class="header" id="myHeader">
         <div class="headLogo">
-            <a href="/home/"><img src="/static/home/images/foodlo Logo/logo1.png" alt="foodlo Logo"></a>
+            <a href="{% url 'home' %}" ><img src="/static/home/images/foodlo Logo/logo1.png" alt="foodlo Logo"></a>
         </div>
         <nav class="nav">
             <ul>
-                <li><a href="/home">Home</a></li>
-                <li><a href="/home/about">About</a></li>
+                <li><a href="{% url 'home' %}" >Home</a></li>
+                <li><a href="{% url 'about' %}" >About</a></li>
                 <li><a href="/home#gallery">Gallery</a></li>
-                <li><a href="/home/products">Order Now</a></li>
+                <li><a href="{% url 'products' %}" >Order Now</a></li>
             </ul>
         </nav>
         <ul class="cart-login">

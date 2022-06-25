@@ -81,13 +81,25 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 #    }
 #}
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': #'django.db.backends.postgresql',
+#        'NAME': 'edsukixe',
+#        'USER': 'edsukixe',
+#        'PASSWORD': #'fAli3e1Blr0getrq5dDOSfNQ2B_Rmjuz',
+#        'HOST': #'castor.db.elephantsql.com',
+#        'PORT': 5432
+#    }
+#}
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'edsukixe',
-        'USER': 'edsukixe',
-        'PASSWORD': 'fAli3e1Blr0getrq5dDOSfNQ2B_Rmjuz',
-        'HOST': 'castor.db.elephantsql.com',
+        'NAME': 'jxcnkxda',
+        'USER': 'jxcnkxda',
+        'PASSWORD': '3hli_cKuDrBeh31Gz59OS4N40TaPIfE9',
+        'HOST': 'ziggy.db.elephantsql.com',
         'PORT': 5432
     }
 }

@@ -1,11 +1,204 @@
 {% extends "home/layout.html" %}
+{% load static %}
 
 {% block body %}
 
-
- <!-- Write code here -->
-
-<h1>hjhjhjhjjhjhjhjh</h1>
-
+    <!-- Product Page -->
+    <section class="products">
+        <div class="productsTop">
+            <div class="searchContainer">
+                <input type="search" id="pSearch" placeholder="Search product name">
+                <button id="search">Search</button>
+            </div>
+            <div class="categoryButtonsContainer">
+                <button class="categoryBtn">All</button>
+                <button class="categoryBtn">Pizza</button>
+                <button class="categoryBtn">Pasta</button>
+                <button class="categoryBtn">Milkshake</button>
+            </div>
+        </div>
+        <div class="productsBottom">
+            <div class="card pdCard card-1">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">    
+                    <div class="prodImage">
+                        <img src="/static/home/images/zinger.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Mighty Zinger</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-2">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/pasta.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Nonna's Pasta</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-3">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/milkshake.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Milkshake</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-4">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/zinger.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Mighty Zinger</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-5">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/pasta.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Nonna's Pasta</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-6">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/milkshake.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Milkshake</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-7">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/zinger.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Mighty Zinger</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-8">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/pasta.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Nonna's Pasta</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-9">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/milkshake.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Milkshake</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-10">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/zinger.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Mighty Zinger</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-11">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/pasta.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Nonna's Pasta</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-12">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/milkshake.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Milkshake</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-13">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/zinger.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Mighty Zinger</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-14">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/pasta.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Nonna's Pasta</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+            <div class="card pdCard card-15">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">
+                    <div class="prodImage">
+                        <img src="/static/home/images/milkshake.png" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">Milkshake</div>
+                    <div class="imgPrice">$8</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}

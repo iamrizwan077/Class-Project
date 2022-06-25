@@ -11,7 +11,7 @@
         <div class="hero-left">
             <h1 class="hero-heading">Perfect Ambiance & <br> Best Quality Food</h1>
             <p class="hero-para">Satisfy your cravings by getting the best quality food from and enjoy with your beloved ones. Customer satisfaction is our first priority. Come and have an experience like you've never had before.</p>
-            <a href="/home/products" class="hero-btn">Order Now</a>
+            <a href="{% url 'products' %}" class="hero-btn">Order Now</a>
         </div>
         <div class="hero-right">
             <img src="{% static 'home/images/heroImage.jpg'%}" alt="" class="hero-img" >
@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="btn-container">
-            <a href="/home/products" class="fpBtn">All Products</a>
+            <a href="{% url 'products' %}"  class="fpBtn">All Products</a>
         </div>
     </section>
 
