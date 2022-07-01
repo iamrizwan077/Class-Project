@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="productsBottom">
-            <div class="card pdCard card-1">
+<!--            <div class="card pdCard card-1">
                 <div class="imgIContainer">
                     <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">    
                     <div class="prodImage">
@@ -198,7 +198,21 @@
                     <div class="imgPrice">$8</div>
                 </div>
             </div>
-        </div>
+ -->
+          {% for product in products %}
+                     <div class="card pdCard card-16">
+                <div class="imgIContainer">
+                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">    
+                    <div class="prodImage">
+                        <img src="{{ image }}" alt="" class="center" id="pImage">
+                    </div>
+                </div>
+                <div class="card-text">
+                    <div class="imgName">{{ name }}</div>
+                    <div class="imgPrice">{{ price }}</div>
+                </div>
+            </div>
+          {% endfor %}
     </section>
 
 {% endblock %}

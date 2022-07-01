@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from .models import Users, Product
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -49,6 +49,7 @@ def about(request):
 
 def products(request):
     return render(request, "home/products.html",{
+      "products": Product.objects.all(),
       "name": Product.foodname,
       "image": Product.foodimg,
       "desc":Product.fooddesc,
