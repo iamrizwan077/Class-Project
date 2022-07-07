@@ -1,16 +1,81 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
-from .models import Users, Product
+from .models import Users, Customer,Category,Product,Order,OrderDetails,Cart
 from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views import View
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
   return render(request, "home/index.html")
 
+class ProductView(View):
+  def get(self, request,data=None):
+    if data==None:
+      products=Product.objects.all()
+    elif data == 1 or data == 2 or data ==3:
+      products=Product.objects.filter(foodcategory=data)
+      
+    return render(request,'home/products.html',{
+      'products':products
+    })
 
-def register(request):
+
+
+class ProductSpecificView(View):
+  def get(self, request, pk):
+    product=Product.objects.get(pk=pk)
+    return render(request,'home/productspecific.html',{
+      'product':product
+    })
+
+    
+
+
+
+class RegisterView(View):
+  def get(self,request):
+    form=RegisterForm()
+    return render(request,'registration/register.html',{
+      'form':form
+    })
+    
+  def post(self,request):
+      
+    form=RegisterForm(request.POST)
+    if form.is_valid():
+      messages.success(request,'Congratulations! Registered successfully')
+      form.save()
+    return render(request,'registration/register.html',{
+      'form':form
+    })
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  """
   if request.method =="POST":
     form=RegisterForm(request.POST)
     if form.is_valid:
@@ -38,7 +103,8 @@ def register(request):
   return render(request, "registration/register.html",{
     "form": form
   })
-
+"""
+  
 def login(request):
   return render(request, "registration/login.html")
 
@@ -47,11 +113,11 @@ def about(request):
 
 
 
-def products(request):
-    return render(request, "home/products.html",{
-      "products": Product.objects.all(),
-      "name": Product.foodname,
-      "image": Product.foodimg,
-      "desc":Product.fooddesc,
-      "price": Product.price
-    })
+#def products(request):
+#    return render(request, #"home/products.html")
+
+def productspecific(request):
+  return render(request, "home/productspecific.html")
+
+def cart(request):
+  return render(request,'home/cart.html')

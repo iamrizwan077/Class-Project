@@ -1,10 +1,158 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 
 
 class RegisterForm(UserCreationForm):
-    def __init__(self, *args, **kwargs):
+
+  username=forms.CharField(
+    required=True,
+    label='',
+    widget=forms.TextInput(
+      attrs={
+       'class':'input-field',
+        'placeholder':'Enter your name',
+        'required':''
+       }
+    )
+  )  
+  email=forms.CharField(
+    required=True,
+    label='',
+    widget=forms.EmailInput(
+      attrs={
+       'class':'input-field',
+        'placeholder':'Enter your email',
+        'required':''
+       }
+    )
+  )  
+  password1=forms.CharField(
+    required=True,
+    label='',
+    widget=forms.PasswordInput(
+      attrs={
+       'class':'input-field',
+        'placeholder':'Enter password',
+        'required':''
+        
+       }
+    )
+  )  
+  password2=forms.CharField(
+    required=True,
+    label='',
+    widget=forms.PasswordInput(
+      attrs={
+       'class':'input-field',
+        'placeholder':'Confirm password',
+        'required':''
+       }
+    )
+  )
+  
+  class Meta:
+    model = User
+    fields = ['username','email','password1','password2']
+    widgets={'username':forms.TextInput(attrs={
+      'class':'input-field'
+    })}
+  
+  
+class LoginForm(AuthenticationForm):
+  username=UsernameField(widget=forms.TextInput(attrs={
+    'autofocus':True,
+    'class':'input-field',
+    'required':'',
+    'placeholder':'Enter your username'
+  }))
+  password=forms.CharField(widget=forms.PasswordInput(attrs={
+    'class':'input-field',
+    'required':'',
+    'placeholder':'Enter your password'
+  }))
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  """def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["username"].widget.attrs.update({
             "required": "",
@@ -48,7 +196,7 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username','email','password1','password2',)
-
+"""
 
 
 

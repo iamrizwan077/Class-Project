@@ -11,10 +11,10 @@
                 <button id="search">Search</button>
             </div>
             <div class="categoryButtonsContainer">
-                <button class="categoryBtn">All</button>
-                <button class="categoryBtn">Pizza</button>
-                <button class="categoryBtn">Pasta</button>
-                <button class="categoryBtn">Milkshake</button>
+                <button class="categoryBtn"><a href="{% url 'products' %}">All</a></button>
+                <button class="categoryBtn"><a href="{% url 'productsfilter' 1 %}">Pizza</a></button>
+                <button class="categoryBtn"><a href="{% url 'productsfilter' 2 %}">Pasta</a></button>
+                <button class="categoryBtn"><a href="{% url 'productsfilter' 3 %}">Milk Shake</a></button>
             </div>
         </div>
         <div class="productsBottom">
@@ -199,17 +199,17 @@
                 </div>
             </div>
  -->
-          {% for product in products %}
-                     <div class="card pdCard card-16">
+          {% for prod in products %}
+             <div class="card pdCard card-16">
                 <div class="imgIContainer">
                     <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">    
                     <div class="prodImage">
-                        <img src="{{ image }}" alt="" class="center" id="pImage">
+                        <img src="{{ prod.foodimg.url }}" alt="" class="center" id="pImage">
                     </div>
-                </div>
+                </div></a>
                 <div class="card-text">
-                    <div class="imgName">{{ name }}</div>
-                    <div class="imgPrice">{{ price }}</div>
+                   <a href="{% url 'productspecific' prod.id %}"> <div class="imgName">{{ prod.foodname }}</div></a>
+                    <div class="imgPrice">{{ prod.price }}</div>
                 </div>
             </div>
           {% endfor %}

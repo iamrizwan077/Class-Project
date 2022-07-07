@@ -28,9 +28,9 @@ class Customer(models.Model):
   def __str__(self):
     return self.user
 
-CATEGORY_CHOICE=(("pz","Pizza"),
-                ("ps","Pasta"),
-                ("ms","Milk Shake"),
+CATEGORY_CHOICE=(("Pizza","Pizza"),
+                ("Pasta","Pasta"),
+                ("Milk Shake","Milk Shake"),
                 )
 
 class Category(models.Model):
