@@ -3,9 +3,12 @@ from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
+
 class Users(models.Model):
-  username=models.CharField(max_length=64)
-password=models.CharField(max_length=22)
+    username = models.CharField(max_length=64)
+
+
+password = models.CharField(max_length=22)
 
 #class Products(models.Model):
 #  name=models.CharField(max_length=64)
@@ -15,73 +18,77 @@ password=models.CharField(max_length=22)
 #  def __str__(self):
 #    return self.name
 
-STATE=(("Sd","Sindh"),
-       ("Pjb","Punjab"),
-       ("Bal","Balochistan"),
-       ("Kp","Khyber PakhtunKhwa"),
-      )
+STATE = (
+    ("Sd", "Sindh"),
+    ("Pjb", "Punjab"),
+    ("Bal", "Balochistan"),
+    ("Kp", "Khyber PakhtunKhwa"),
+)
+
+
 class Customer(models.Model):
-  user=models.ForeignKey(User,on_delete=models.CASCADE)
-  name=models.CharField(max_length=64)
-  address=models.CharField(choices=STATE,max_length=64)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=64)
+    address = models.CharField(choices=STATE, max_length=64)
 
-  def __str__(self):
-    return self.user
+    def __str__(self):
+        return self.user
 
-CATEGORY_CHOICE=(("Pizza","Pizza"),
-                ("Pasta","Pasta"),
-                ("Milk Shake","Milk Shake"),
-                )
+
+CATEGORY_CHOICE = (
+    ("Pizza", "Pizza"),
+    ("Pasta", "Pasta"),
+    ("Milk Shake", "Milk Shake"),
+)
+
 
 class Category(models.Model):
-  
-  foodtype=models.CharField(choices=CATEGORY_CHOICE,max_length=64)
-  typedesc=models.CharField(max_length=64)
 
-  def __str__(self):
-    return self.foodtype
+    foodtype = models.CharField(choices=CATEGORY_CHOICE, max_length=64)
+    typedesc = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.foodtype
 
 
 class Product(models.Model):
-  foodcategory=models.ForeignKey(Category, on_delete=models.CASCADE)
-  foodname=models.CharField(max_length=64)
-  foodimg=models.ImageField()
-  fooddesc=models.TextField(max_length=200)
-  price=models.FloatField()
-  
-  def __str__(self):
-    return self.foodname
+    foodcategory = models.ForeignKey(Category, on_delete=models.CASCADE)
+    foodname = models.CharField(max_length=64)
+    foodimg = models.ImageField()
+    fooddesc = models.TextField(max_length=200)
+    price = models.FloatField()
 
-STATUS_CHOICE=(("Accepted","Accepted"),
-               ("Packed","Packed"),
-               ("On the way","On the way"),
-               ("Delivered","Delivered"),
-               ("Cancel","Cancel"),
+    def __str__(self):
+        return self.foodname
+
+
+STATUS_CHOICE = (
+    ("Accepted", "Accepted"),
+    ("Packed", "Packed"),
+    ("On the way", "On the way"),
+    ("Delivered", "Delivered"),
+    ("Cancel", "Cancel"),
 )
 
-class Order(models.Model):
-  user=models.ForeignKey(User,on_delete=models.CASCADE)
-  date=models.DateTimeField(auto_now_add=True)
-  status=models.CharField(choices=STATUS_CHOICE,default="Pending",max_length=30)
 
-  def __str__(self):
-    return self.user + str(self.date)
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(choices=STATUS_CHOICE,
+                              default="Pending",
+                              max_length=30)
+
+    #def __str__(self):
+    # return self.user + str(self.date)
 
 
 class OrderDetails(models.Model):
-  orderid = models.ForeignKey(Order,on_delete=models.CASCADE)
-  foodid=models.ForeignKey(Product,on_delete=models.CASCADE)
-  quantity=models.PositiveIntegerField(default=1)
-
-
-  def __str__(self):
-    return str(self.orderid)
+    orderid = models.ForeignKey(Order, on_delete=models.CASCADE)
+    foodid = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
 
 
 class Cart(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE)
-    items=models.ForeignKey(Product,on_delete=models.CASCADE)
-    quantity=models.PositiveIntegerField(default=1)
-
-    def __str__(self):
-      return self.user
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    items = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)

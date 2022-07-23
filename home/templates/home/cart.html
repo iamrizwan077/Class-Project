@@ -1,6 +1,7 @@
 {% extends "home/layout.html" %}
 {% load static %}
-
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 {% block body %}
 
@@ -13,7 +14,7 @@
                 <div class="leftCartTop">
                     <h1 class="cartHeader">Cart Items</h1>
                 </div>
-                <div class="leftCartBottom cartProduct">
+              <!--  <div class="leftCartBottom cartProduct">
                     <div class="bottomFirst">
                         <img src="../images/neapolitan-pizza.jpg" alt="">
                     </div>
@@ -25,21 +26,24 @@
                             <div class="cartProductPrice">$14.99</div>
                         </div>
                     </div>
-                </div>
-                <div class="cartProductSeperator"></div>
-                <div class="leftCartBottom cartProduct">
+                </div>  
+                <div class="cartProductSeperator"></div> -->
+                {% for cartitem in carts %}
+              
+                  <div class="leftCartBottom cartProduct">
                     <div class="bottomFirst">
-                        <img src="../images/pasta.png" alt="">
+                        <img src="{{ cartitem.items.foodimg.url }}" alt="">
                     </div>
                     <div class="bottomSecond">
-                        <h3 class="cartProductName">Nonna's Pasta</h2>
-                        <p class="cartProductQty">Quantity: <button class="subtractQty">-</button> 1 <button class="addQty">+</button> </p>
+                        <h3 class="cartProductName">{{ cartitem.items.foodname }}</h3>
+                        <p class="cartProductQty">Quantity: <button class="subtractQty">-</button> {{ cartitem.quantity }} <a><button class="addQty" pid="{{cartitem.items.id}}">+</button></a><!--<button class="addQty">+</button> --></p>
                         <div class="btnAndPrice">
                             <button class="removeItemFromCart">Remove Item</button>
-                            <div class="cartProductPrice">$14.99</div>
+                            <div class="cartProductPrice">${{ cartitem.items.price }}</div>
                         </div>
                     </div>
                 </div>
+              {% endfor %}
             </div>
             <div class="rightCartChild">
                 <div class="rightCartTop">
@@ -48,7 +52,7 @@
                 <div class="rightCartMiddle">
                     <div class="cartAmount">
                         <h5>Amount</h5>
-                        <p>$14.99</p>
+                        <p>${{amount}}</p>
                     </div>
                     <div class="cartShipping">
                         <h5>Shipping Fee</h5>
@@ -57,13 +61,21 @@
                 </div>
                 <div class="rightCartBottom">
                     <p><strong>Total</strong><span>(Including VAT)</span></p>
-                    <p>$17.99</p>
+                    <p>${{totalamount}}</p>
                 </div>
                 <div class="checkoutButtonContainer">
-                    <a href="./checkout.html"><button class="checkoutButton">Checkout</button></a>
+                    <a href="{% url 'checkout' %}"><button class="checkoutButton">Checkout</button></a>
                 </div>
             </div>
         </div>
     </section>
+
+<script>
+  $('.addQty').click(function(){
+  var id = $(this).attr("pid").toString();
+  console.log(id)
+})
+</script>
+
 
     {% endblock %}

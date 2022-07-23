@@ -62,10 +62,15 @@
                     <p id="productDesc"><span>Description:</span><!-- Sizzling zinger patty topped on with melted cheese, lettuce, tomatoes, pickles, onions, ketchup and mustard on a sesame seed bun.--> {{ product.fooddesc }}   </p>
                     <h2 id="productPrice">$<!--10.99-->{{ product.price }}</h2>
                     <div class="psbtnwrapper">
-                        <button class="psbtn" id="addToCart">Add To Cart <i class="fa-solid fa-bag-shopping"></i></button>
-                        <button class="psbtn" id="buyNow">Buy Now <i class="fa-solid fa-money-bill-wave"></i></button>
+                      <form action='/addtocart'>
+                        <input type="hidden" value= {{ product.id }} name="prod_id" >
+                        <button class="psbtn" type="submit"  id="addToCart">Add To Cart <i class="fa-solid fa-bag-shopping"></i></button>
+                      <!--  <button class="psbtn" id="buyNow">Buy Now <i class="fa-solid fa-money-bill-wave"></i></button> -->
+                      </form>
+                      <!--<button class="psbtn"  id="addToCart">Add To Cart <i class="fa-solid fa-bag-shopping"></i></button>-->
+                        <!--<button class="psbtn" id="buyNow">Buy Now <i class="fa-solid fa-money-bill-wave"></i></button>-->
                     </div>
-                    <h5 id="prodCategory">Category:<!-- Burger -->{{ product.foodcategory  }} </h5>
+                    <h5 id="prodCategory">Category:<!-- Burger -->{{ product.foodcategory }} </h5>
                 </div>
             </div>
         </section>

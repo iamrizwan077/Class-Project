@@ -120,4 +120,54 @@ def productspecific(request):
   return render(request, "home/productspecific.html")
 
 def cart(request):
-  return render(request,'home/cart.html')
+  if request.user.is_authenticated:
+    user=request.user
+    cartitems=Cart.objects.filter(user=user)
+
+  amount=0.0
+  shipping_amount=3.0
+  total_amount=0.0
+  cart_product=[p for p in Cart.objects.all() if p.user == user]
+  if cart_product:
+    for p in cart_product:
+      tempamount=(p.quantity * p.items.price)
+      amount += tempamount
+      total_amount =amount+shipping_amount
+    return render(request,'home/cart.html',{'carts':cartitems, 'totalamount':total_amount,'amount':amount})
+  else:
+    return render(request, 'home/emptycart.html')
+
+def addtocart(request):
+  user=request.user
+  product_id=request.GET.get('prod_id')
+  product=Product.objects.get(id=product_id)
+  Cart(user=user,items=product).save()
+  return redirect('/cart')
+
+def checkout(request):
+  user=request.user
+  checkout = Cart.objects.filter(user=user)
+  total_price=0.0
+  item_price=[price for price in checkout]
+  for val in item_price:
+    total_price+=val.items.price
+  
+  
+  return render(request, 'home/checkout.html',{'incheckout':checkout,'total_price':total_price})
+
+def orders(request):
+  user=request.user
+  checkout = Cart.objects.filter(user=user)
+  total_price=0.0
+  item_price=[price for price in checkout]
+  for val in item_price:
+    total_price+=val.items.price
+
+  person = [user for user in checkout]
+  order_id=person[0].id
+#  orders=Order(checkout)
+#  order_id = (orders)
+  
+  #order_id=2
+  
+  return render(request,'home/orders.html',{'orderid':order_id,'incheckout':checkout,'total_price':total_price})
