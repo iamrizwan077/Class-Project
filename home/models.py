@@ -92,3 +92,14 @@ class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     items = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+
+
+class UserInfo(models.Model):
+  #  user = models.ForeignKey(User, on_delete=models.CASCADE,default="1")
+    firstname = models.CharField(max_length=64)
+    lastname = models.CharField(max_length=64)
+    address = models.CharField(max_length=64)
+    city = models.CharField(max_length=64)
+    zip = models.IntegerField()
+    phone = models.CharField(max_length=16)
+    email = models.EmailField()

@@ -1,0 +1,26 @@
+{% extends 'home/layout.html' %}
+{% load static %}
+
+{% block body %}
+
+<h1>Profile</h1>
+<h4>First Name:</h4><p>{{userinfo.firstname}}</p>
+<h4>Last Name:</h4><p>{{userinfo.last}}</p>
+<h4>Address:</h4><p>{{userinfo.address}}</p>
+<h4>City:</h4><p>{{userinfo.city}}</p>
+<h4>Postcode:</h4><p>{{userinfo.zip}}</p>
+<h4>Phone No:</h4><p>{{userinfo.phone}}</p>
+<h4>Email:</h4><p>{{userinfo.email}}</p>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
