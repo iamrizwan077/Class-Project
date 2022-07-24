@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models importz Users, Customer,Category,Product,Order,OrderDetails,Cart
+from .models import Users, Customer,Category,Product,Order,OrderDetails,Cart
 
 # Register your models here.
 @admin.register(Customer)
