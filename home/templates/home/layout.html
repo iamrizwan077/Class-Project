@@ -14,6 +14,7 @@
       <link rel="stylesheet" href="{% static 'home/about.css' %}">  
     
       <link rel="stylesheet" href="{% static 'home/checkout.css' %}">  
+      <link rel="stylesheet" href="{% static 'home/changepassword.css' %}">  
       <link rel="stylesheet" href="{% static 'home/orders.css' %}">  
     <link rel="stylesheet" href="{% static 'registration/login.css' %}">     
 <!--  <script src="{% static 'home/ajaxscripts.js' %}"></script> -->
@@ -21,6 +22,7 @@
       <link rel="stylesheet" href="{% static 'home/products.css' %}">
     
       <link rel="stylesheet" href="{% static 'home/cart.css' %}">
+      <link rel="stylesheet" href="{% static 'home/emptycart.css' %}">
   
       <link rel="stylesheet" href="{% static 'registration/register.css' %}">
       <link rel="stylesheet" href="{% static 'home/productspecific.css' %}">
@@ -61,6 +63,7 @@
         <div class="cart-btn-wrapper">
             
           {% if request.user.is_authenticated %}  <a href="{% url 'cart' %}" class="cart">Cart <i class="fas fa-shopping-cart"></i></a>
+           <a href="{% url 'logout' %}" class="cart">Logout <!--<i class="fas fa-shopping-cart"></i>--></a>
       <!--    <a href="{% url 'profile' %}" class="profile">Profile <!--<i class="fas fa-shopping-cart"></i></a> -->
         
           {% else %}
@@ -89,6 +92,7 @@
           <!--<a href="{% url 'login' %}"><!--Register/ --><!-- Login <i class="fa-solid fa-user-plus"></i></a>-->
             
           {% if request.user.is_authenticated %}  <li><a href="{% url 'cart' %}">Cart <i class="fas fa-shopping-cart"></i></a></li>
+           <li><a href="{% url 'logout' %}">Logout <!--<i class="fas fa-shopping-cart"></i>--></a></li>
      <!--     <li><a href="{% url 'profile' %}">Profile <!--<i class="fas fa-shopping-cart"></i></a></li>-->
          
           {% else %}
@@ -200,8 +204,61 @@
     })
 
     $('.addQty').click(function(){
-  var id = $(this).attr("pid").toString();
-  console.log(id)
+      var id = $(this).attr("pid").toString();
+      var qty = $(".cartQty");
+      console.log(id)
+      $.ajax({
+        type:"GET",
+        url:"/pluscart",
+        data:{
+          prodid:id
+        },
+        success: function(data){
+          console.log("success");
+          qty.text(data.quantity);
+          document.getElementById("amtnoshipping").innerText = data.amount;
+          document.getElementById("amtwithshipping").innerText = data.totalamount;
+        }
+      })
+})
+
+      $('.subtractQty').click(function(){
+      var id = $(this).attr("pid").toString();
+      var qty = $(".cartQty");
+      console.log(id)
+      $.ajax({
+        type:"GET",
+        url:"/minuscart",
+        data:{
+          prodid:id
+        },
+        success: function(data){
+          console.log("success");
+          qty.text(data.quantity);
+          document.getElementById("amtnoshipping").innerText = data.amount;
+          document.getElementById("amtwithshipping").innerText = data.totalamount;
+        }
+      })
+})
+
+$('.removeItemFromCart').click(function(){
+      var id = $(this).attr("pid").toString();
+      var eml = this
+      console.log(id)
+      $.ajax({
+        type:"GET",
+        url:"/removecart",
+        data:{
+          prodid:id
+        },
+        success: function(data){
+          console.log(data);
+          console.log("Delete")
+          document.getElementById("amtnoshipping").innerText = data.amount;
+          document.getElementById("amtwithshipping").innerText = data.totalamount;
+          eml.parentNode.parentNode.parentNode.remove()
+        }
+      })
 })
   
 </script>

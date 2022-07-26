@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, UserInfoForm
-from .models import User, Customer, Category, Product, Order, OrderDetails, Cart, UserInfo
+from .models import User, Category, Product, Order, Cart, UserInfo
 from django.contrib.auth import authenticate
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.views import View
 from django.contrib import messages
+from django.db.models import Q
 
 
 # Create your views here.
@@ -31,6 +32,9 @@ class ProductSpecificView(View):
 
 
 class RegisterView(View):
+    def get_success_url(self, user):
+        return redirect('/home/')
+
     def get(self, request):
         form = RegisterForm()
         return render(request, 'registration/register.html', {'form': form})
@@ -42,8 +46,10 @@ class RegisterView(View):
             messages.success(request,
                              'Congratulations! Registered successfully')
             form.save()
-        return render(request, 'registration/register.html', {'form': form})
+            self.get_success_url(user=request.user)
 
+    #return HttpResponseRedirect(self.get_success_url())
+        return render(request, 'registration/register.html', {'form': form})
     """
   if request.method =="POST":
     form=RegisterForm(request.POST)
@@ -75,8 +81,8 @@ class RegisterView(View):
 """
 
 
-def login(request):
-    return render(request, "registration/login.html")
+#def login(request):
+#   return render(request, "registration/login.html")
 
 
 def about(request):
@@ -86,9 +92,8 @@ def about(request):
 #def products(request):
 #    return render(request, #"home/products.html")
 
-
-def productspecific(request):
-    return render(request, "home/productspecific.html")
+#def productspecific(request):
+#   return render(request, "home/productspecific.html")
 
 
 def cart(request):
@@ -114,6 +119,82 @@ def cart(request):
         return render(request, 'home/emptycart.html')
 
 
+def pluscart(request):
+    if request.method == 'GET':
+        user = request.user
+        prodid = request.GET['prodid']
+        c = Cart.objects.get(Q(items=prodid) & Q(user=user))
+        c.quantity += 1
+        c.save()
+
+        amount = 0.0
+        shipping_amount = 3.0
+        total_amount = 0.0
+        cart_product = [
+            p for p in Cart.objects.all() if p.user == request.user
+        ]
+        if cart_product:
+            for p in cart_product:
+                tempamount = (p.quantity * p.items.price)
+                amount += tempamount
+
+            data = {
+                'quantity': c.quantity,
+                'amount': amount,
+                'totalamount': amount + shipping_amount
+            }
+            return JsonResponse(data)
+
+
+def minuscart(request):
+    if request.method == 'GET':
+        user = request.user
+        prodid = request.GET['prodid']
+        c = Cart.objects.get(Q(items=prodid) & Q(user=user))
+        c.quantity -= 1
+        c.save()
+
+        amount = 0.0
+        shipping_amount = 3.0
+        total_amount = 0.0
+        cart_product = [
+            p for p in Cart.objects.all() if p.user == request.user
+        ]
+        if cart_product:
+            for p in cart_product:
+                tempamount = (p.quantity * p.items.price)
+                amount += tempamount
+
+            data = {
+                'quantity': c.quantity,
+                'amount': amount,
+                'totalamount': amount + shipping_amount
+            }
+            return JsonResponse(data)
+
+
+def removecart(request):
+    if request.method == 'GET':
+        user = request.user
+        prodid = request.GET['prodid']
+        c = Cart.objects.get(Q(items=prodid) & Q(user=user))
+        c.delete()
+
+        amount = 0.0
+        shipping_amount = 3.0
+        total_amount = 0.0
+        cart_product = [
+            p for p in Cart.objects.all() if p.user == request.user
+        ]
+        if cart_product:
+            for p in cart_product:
+                tempamount = (p.quantity * p.items.price)
+                amount += tempamount
+
+            data = {'amount': amount, 'totalamount': amount + shipping_amount}
+            return JsonResponse(data)
+
+
 def addtocart(request):
     user = request.user
     product_id = request.GET.get('prod_id')
@@ -128,9 +209,9 @@ def checkout(request):
     total_price = 0.0
     item_price = [price for price in checkout]
     for val in item_price:
-        total_price += val.items.price
+        total_price += val.items.price * val.quantity
 
-    form = UserInfoForm(request.POST)
+    form = UserInfoForm(request.POST or None)
     if form.is_valid():
         messages.success(request, "info saved")
         form.save()
@@ -138,7 +219,7 @@ def checkout(request):
     return render(request, 'home/checkout.html', {
         'form': form,
         'incheckout': checkout,
-        'total_price': total_price
+        'total_price': total_price + 3
     })
 
 
@@ -155,20 +236,25 @@ class OrdersView(View):
         total_price = 0.0
         item_price = [price for price in checkout]
         for val in item_price:
-            total_price += val.items.price
+            total_price += val.items.price * val.quantity
 
-        person = [user for user in checkout]
+    #    person = [user for user in checkout]
         order_id = person[0].id
         #  orders=Order(checkout)
         #  order_id = (orders)
 
         #order_id=2
-
+      #    order=[]
+       # for i in range(0,len(checkout)):
+        #  checkout[i].items.foodname
+  
+    
+      
         return render(
             request, 'home/orders.html', {
                 'orderid': order_id,
                 'incheckout': checkout,
-                'total_price': total_price
+                'total_price': total_price + 3
             })
         #            return render(request, 'home/orders.html',{'form':form})
         # else:
@@ -188,12 +274,11 @@ class OrdersView(View):
 """
 
 
-
 def profile(request):
     user = request.user
     #  print(user)
-  #  userinfo = UserInfo.objects.get()
+    #  userinfo = UserInfo.objects.get()
     print(userinfo)
-   # print(userinfo)
-    userinfo=1
+    # print(userinfo)
+    userinfo = 1
     return render(request, 'home/profile.html', {'userinfo': userinfo})

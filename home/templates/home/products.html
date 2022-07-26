@@ -6,15 +6,11 @@
     <!-- Product Page -->
     <section class="products">
         <div class="productsTop">
-          <!--  <div class="searchContainer">
-                <input type="search" id="pSearch" placeholder="Search product name">
-                <button id="search">Search</button>
-            </div> -->
-            <div class="categoryButtonsContainer">
-                <button class="categoryBtn"><a href="{% url 'products' %}">All</a></button>
-                <button class="categoryBtn"><a href="{% url 'productsfilter' 1 %}">Pizza</a></button>
-                <button class="categoryBtn"><a href="{% url 'productsfilter' 2 %}">Pasta</a></button>
-                <button class="categoryBtn"><a href="{% url 'productsfilter' 3 %}">Milk Shake</a></button>
+            <div class="categoryButtonsContainer" style="margin-right: 0">
+                <button class="categoryBtn"><a style="text-decoration: none; color: black;" href="{% url 'products' %}">All</a></button>
+                <button class="categoryBtn"><a style="text-decoration: none; color: black;" href="{% url 'productsfilter' 1 %}">Pizza</a></button>
+                <button class="categoryBtn"><a style="text-decoration: none; color: black;" href="{% url 'productsfilter' 2 %}">Pasta</a></button>
+                <button class="categoryBtn"><a style="text-decoration: none; color: black;" href="{% url 'productsfilter' 3 %}">Milk Shake</a></button>
             </div>
         </div>
         <div class="productsBottom">
@@ -202,14 +198,14 @@
           {% for prod in products %}
              <div class="card pdCard card-16">
                 <div class="imgIContainer">
-                    <img src="/static/home/images/magnifying-glass.png" id="mglass" alt="">    
+                    <a href="{% url 'productspecific' prod.id %}"><img src="/static/home/images/magnifying-glass.png" id="mglass" alt=""></a> 
                     <div class="prodImage">
-                        <img src="{{ prod.foodimg.url }}" alt="" class="center" id="pImage">
+                        <img style="width: 25rem; height: 25rem;" src="{{ prod.foodimg.url }}" alt="" class="center" id="pImage">
                     </div>
                 </div></a>
                 <div class="card-text">
-                   <a href="{% url 'productspecific' prod.id %}"> <div class="imgName">{{ prod.foodname }}</div></a>
-                    <div class="imgPrice">{{ prod.price }}</div>
+                   <a style="text-decoration:none; color:black; cursor: default;" href="{% url 'productspecific' prod.id %}"> <div class="imgName">{{ prod.foodname }}</div></a>
+                    <div class="imgPrice">${{ prod.price }}</div>
                 </div>
             </div>
           {% endfor %}

@@ -1,14 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MinValueValidator, MaxValueValidator
+#from django.core.validators import MinValueValidator, MaxValueValidator
 # Create your models here.
 
+#class Users(models.Model):
+#   username = models.CharField(max_length=64)
 
-class Users(models.Model):
-    username = models.CharField(max_length=64)
-
-
-password = models.CharField(max_length=22)
+#password = models.CharField(max_length=22)
 
 #class Products(models.Model):
 #  name=models.CharField(max_length=64)
@@ -24,8 +22,7 @@ STATE = (
     ("Bal", "Balochistan"),
     ("Kp", "Khyber PakhtunKhwa"),
 )
-
-
+"""
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=64)
@@ -33,7 +30,7 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.user
-
+"""
 
 CATEGORY_CHOICE = (
     ("Pizza", "Pizza"),
@@ -71,21 +68,20 @@ STATUS_CHOICE = (
 )
 
 
-class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(choices=STATUS_CHOICE,
-                              default="Pending",
-                              max_length=30)
 
     #def __str__(self):
     # return self.user + str(self.date)
 
 
+"""
 class OrderDetails(models.Model):
     orderid = models.ForeignKey(Order, on_delete=models.CASCADE)
     foodid = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+      return str(self.orderid)
+"""
 
 
 class Cart(models.Model):
@@ -93,9 +89,21 @@ class Cart(models.Model):
     items = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
+    def __str__(self):
+      return self.items.foodname
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(choices=STATUS_CHOICE,
+                              default="Pending",
+                              max_length=30)
+    cartid=models.ForeignKey(Cart,on_delete=models.CASCADE)  
+    def __str__(self):
+      return str(self.id)
 
 class UserInfo(models.Model):
-  #  user = models.ForeignKey(User, on_delete=models.CASCADE,default="1")
+    #  user = models.ForeignKey(User, on_delete=models.CASCADE,default="1")
     firstname = models.CharField(max_length=64)
     lastname = models.CharField(max_length=64)
     address = models.CharField(max_length=64)

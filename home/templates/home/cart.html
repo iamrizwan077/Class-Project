@@ -26,6 +26,9 @@
                     </div>
                 </div>  
                 <div class="cartProductSeperator"></div> -->
+              {% if cartitem in carts %}
+                <div></div>
+              {% else %}
                 {% for cartitem in carts %}
               
                   <div class="leftCartBottom cartProduct">
@@ -34,14 +37,23 @@
                     </div>
                     <div class="bottomSecond">
                         <h3 class="cartProductName">{{ cartitem.items.foodname }}</h3>
-                        <p class="cartProductQty">Quantity: <button class="subtractQty">-</button> {{ cartitem.quantity }} <a><button class="addQty" pid="{{cartitem.items.id}}">+</button></a><!--<button class="addQty">+</button> --></p>
+                        <p class="cartProductQty">Quantity: 
+                          <div class="cartBtnContainer">
+                            <div class="tempContainer">
+                              <a><button class="subtractQty" pid="{{cartitem.items.id}}">-</button></a> 
+                              <p class="cartQty">{{ cartitem.quantity }} </p>
+                              <a><button class="addQty" pid="{{cartitem.items.id}}">+</button></a>
+                            </div>
+                          </div>
+                        </p>
                         <div class="btnAndPrice">
-                            <button class="removeItemFromCart">Remove Item</button>
+                            <button class="removeItemFromCart" pid="{{cartitem.items.id}}">Remove Item</button>
                             <div class="cartProductPrice">${{ cartitem.items.price }}</div>
                         </div>
                     </div>
                 </div>
               {% endfor %}
+              {% endif %}
             </div>
             <div class="rightCartChild">
                 <div class="rightCartTop">
@@ -50,7 +62,7 @@
                 <div class="rightCartMiddle">
                     <div class="cartAmount">
                         <h5>Amount</h5>
-                        <p>${{amount}}</p>
+                        <p>$<span id="amtnoshipping">{{amount}}</span></p>
                     </div>
                     <div class="cartShipping">
                         <h5>Shipping Fee</h5>
@@ -59,7 +71,7 @@
                 </div>
                 <div class="rightCartBottom">
                     <p><strong>Total</strong><span>(Including VAT)</span></p>
-                    <p>${{totalamount}}</p>
+                    <p>$<span id="amtwithshipping">{{totalamount}}</span></p>
                 </div>
                 <div class="checkoutButtonContainer">
                     <a href="{% url 'checkout' %}"><button class="checkoutButton">Checkout</button></a>
@@ -69,4 +81,4 @@
     </section>
 
 
-    {% endblock %}
+    {% endblock %}z  

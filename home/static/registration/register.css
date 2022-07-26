@@ -68,6 +68,10 @@
     margin-top: 1rem;
 }
 
+.cblabel {
+    font-size: 1rem !important;
+}
+
 .registerFooter {
     font-size: 1.3rem;
 }

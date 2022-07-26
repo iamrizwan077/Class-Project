@@ -118,7 +118,9 @@ class UserInfoForm(forms.ModelForm):
             'firstname', 'lastname', 'address', 'city', 'zip', 'phone', 'email'
         ]
 
-    """def __init__(self, *args, **kwargs):
+
+"""
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["username"].widget.attrs.update({
             "required": "",
@@ -163,8 +165,6 @@ class UserInfoForm(forms.ModelForm):
         model = User
         fields = ('username','email','password1','password2',)
 """
-
-
 """
 class RegisterForm(forms.Form):
       username= forms.CharField(widget= forms.TextInput(attrs={ 

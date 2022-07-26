@@ -4,6 +4,7 @@
 {% block body %}
 
 
+
 <!-- Checkout Section -->
 
         <p id="checkoutMainHeading">Checkout</p>
@@ -16,16 +17,21 @@
                         <form method="post" id="userinfoform">
                           {% csrf_token %}
                           
-                          {% for message in messages %}
-                         <p> {{ message }} </p>
-                            {% endfor %}
                           {% for field in form %}
                           
-                          {% if field.errors %}{{field.errors}}{%endif%}
                           
                       
                           {{ field.label_tag }} {{field}}
+                          
+                          
+                          {% if messages %} 
+                          {% for message in messages %}
+                         <p> {{ message }} </p>
+                            {% endfor %}
+                        {% endif %}
+                          {% if field.errors %}<div style="color:red; font-size:10px;">{{field.errors}}</div>{%endif%}
                           {% endfor %}
+                          
     
                             <!--<div class="nameContainer">
                                 <div class="firstNameContainer checkoutInputs">

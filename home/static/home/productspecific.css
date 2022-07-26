@@ -17,16 +17,12 @@
 }
 
 .leftpsgridchild img {
-    /* width: 40rem; */
+    width: 40rem !important;
     height: 55rem;
     object-fit: cover;
     border-radius: 0.7rem;
     box-shadow: 0 0.8rem 1.4rem 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-}
-
-#firstImg {
-    filter: brightness(80%);
 }
 
 .rightpsgridchild {
