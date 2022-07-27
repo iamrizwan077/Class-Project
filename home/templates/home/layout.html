@@ -64,7 +64,7 @@
             
           {% if request.user.is_authenticated %}  <a href="{% url 'cart' %}" class="cart">Cart <i class="fas fa-shopping-cart"></i></a>
            <a href="{% url 'logout' %}" class="cart">Logout <!--<i class="fas fa-shopping-cart"></i>--></a>
-      <!--    <a href="{% url 'profile' %}" class="profile">Profile <!--<i class="fas fa-shopping-cart"></i></a> -->
+           <a href="{% url 'profile' %}" class="profile">Profile <i class="fas fa-user"></i></a> 
         
           {% else %}
           <a href="{% url 'login' %}" class="login">Login <i class="fa-solid fa-user-plus"></i></a>
@@ -93,7 +93,7 @@
             
           {% if request.user.is_authenticated %}  <li><a href="{% url 'cart' %}">Cart <i class="fas fa-shopping-cart"></i></a></li>
            <li><a href="{% url 'logout' %}">Logout <!--<i class="fas fa-shopping-cart"></i>--></a></li>
-     <!--     <li><a href="{% url 'profile' %}">Profile <!--<i class="fas fa-shopping-cart"></i></a></li>-->
+          <li><a href="{% url 'profile' %}">Profile <i class="fas fa-user"></i></a></li>
          
           {% else %}
           <li><a href="{% url 'login' %}" class="login">Login <i class="fa-solid fa-user-plus"></i></a></li>

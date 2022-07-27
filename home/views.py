@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm, UserInfoForm
-from .models import User, Category, Product, Order, Cart, UserInfo
+from .models import User, Category, Product, Order, Cart, OrderInfo, CartInfo, UserInfo
 from django.contrib.auth import authenticate
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
@@ -27,8 +27,13 @@ class ProductView(View):
 class ProductSpecificView(View):
     def get(self, request, pk):
         product = Product.objects.get(pk=pk)
-        return render(request, 'home/productspecific.html',
-                      {'product': product})
+        already_in_cart = False
+        already_in_cart = CartInfo.objects.filter(
+            Q(items=product.id) & Q(user=request.user)).exists()
+        return render(request, 'home/productspecific.html', {
+            'product': product,
+            "already_in_cart": already_in_cart
+        })
 
 
 class RegisterView(View):
@@ -99,12 +104,12 @@ def about(request):
 def cart(request):
     if request.user.is_authenticated:
         user = request.user
-        cartitems = Cart.objects.filter(user=user)
+        cartitems = CartInfo.objects.filter(user=user)
 
     amount = 0.0
     shipping_amount = 3.0
     total_amount = 0.0
-    cart_product = [p for p in Cart.objects.all() if p.user == user]
+    cart_product = [p for p in CartInfo.objects.all() if p.user == user]
     if cart_product:
         for p in cart_product:
             tempamount = (p.quantity * p.items.price)
@@ -123,7 +128,7 @@ def pluscart(request):
     if request.method == 'GET':
         user = request.user
         prodid = request.GET['prodid']
-        c = Cart.objects.get(Q(items=prodid) & Q(user=user))
+        c = CartInfo.objects.get(Q(items=prodid) & Q(user=user))
         c.quantity += 1
         c.save()
 
@@ -131,7 +136,7 @@ def pluscart(request):
         shipping_amount = 3.0
         total_amount = 0.0
         cart_product = [
-            p for p in Cart.objects.all() if p.user == request.user
+            p for p in CartInfo.objects.all() if p.user == request.user
         ]
         if cart_product:
             for p in cart_product:
@@ -150,7 +155,7 @@ def minuscart(request):
     if request.method == 'GET':
         user = request.user
         prodid = request.GET['prodid']
-        c = Cart.objects.get(Q(items=prodid) & Q(user=user))
+        c = CartInfo.objects.get(Q(items=prodid) & Q(user=user))
         c.quantity -= 1
         c.save()
 
@@ -158,7 +163,7 @@ def minuscart(request):
         shipping_amount = 3.0
         total_amount = 0.0
         cart_product = [
-            p for p in Cart.objects.all() if p.user == request.user
+            p for p in CartInfo.objects.all() if p.user == request.user
         ]
         if cart_product:
             for p in cart_product:
@@ -177,14 +182,14 @@ def removecart(request):
     if request.method == 'GET':
         user = request.user
         prodid = request.GET['prodid']
-        c = Cart.objects.get(Q(items=prodid) & Q(user=user))
+        c = CartInfo.objects.get(Q(items=prodid) & Q(user=user))
         c.delete()
 
         amount = 0.0
         shipping_amount = 3.0
         total_amount = 0.0
         cart_product = [
-            p for p in Cart.objects.all() if p.user == request.user
+            p for p in CartInfo.objects.all() if p.user == request.user
         ]
         if cart_product:
             for p in cart_product:
@@ -199,13 +204,16 @@ def addtocart(request):
     user = request.user
     product_id = request.GET.get('prod_id')
     product = Product.objects.get(id=product_id)
-    Cart(user=user, items=product).save()
+    cart = Cart.objects.filter(user=user)
+    cartid = Cart(user=user)
+    cartid.save()
+    CartInfo(user=user, items=product, cartid=cartid).save()
     return redirect('/cart')
 
 
 def checkout(request):
     user = request.user
-    checkout = Cart.objects.filter(user=user)
+    checkout = CartInfo.objects.filter(user=user)
     total_price = 0.0
     item_price = [price for price in checkout]
     for val in item_price:
@@ -232,26 +240,33 @@ def checkout(request):
 class OrdersView(View):
     def get(self, request):
         user = request.user
-        checkout = Cart.objects.filter(user=user)
+        checkout = CartInfo.objects.filter(user=user)
         total_price = 0.0
         item_price = [price for price in checkout]
         for val in item_price:
             total_price += val.items.price * val.quantity
 
     #    person = [user for user in checkout]
-        order_id = person[0].id
-        #  orders=Order(checkout)
-        #  order_id = (orders)
-
+    #   order_id = person[0].id
+    #  orders=Order(checkout)
+    #  order_id = (orders)
+        cartid = Cart(user=user)
+        cartid.save()
+        order = Order(user=user, cartid=cartid)
+        order.save()
+        orderinfo = OrderInfo(user=user, orderid=order)
+        orderinfo.save()
         #order_id=2
-      #    order=[]
-       # for i in range(0,len(checkout)):
+        #    order=[]
+        # for i in range(0,len(checkout)):
         #  checkout[i].items.foodname
-  
-    
-      
+        order_id = order.id
+        #  cartlater = Cart.objects.filter(user=user)
+        #  cartlater.delete()
+
         return render(
             request, 'home/orders.html', {
+                'user': str(user).title(),
                 'orderid': order_id,
                 'incheckout': checkout,
                 'total_price': total_price + 3
@@ -278,7 +293,13 @@ def profile(request):
     user = request.user
     #  print(user)
     #  userinfo = UserInfo.objects.get()
-    print(userinfo)
+    #  print(userinfo)
     # print(userinfo)
-    userinfo = 1
-    return render(request, 'home/profile.html', {'userinfo': userinfo})
+    #userinfo = 1
+    return render(
+        request,
+        'home/profile.html',
+        {
+            #   'userinfo': userinfo,
+            'user': user
+        })

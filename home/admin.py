@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Order, Cart
+from .models import Category, Product, Order,OrderInfo, Cart,CartInfo
 
 # Register your models here.
 """
@@ -19,13 +19,7 @@ class ProductModelAdmin(admin.ModelAdmin):
     list_display = [
         'id', 'foodcategory', 'foodname', 'foodimg', 'fooddesc', 'price'
     ]
-
-
-@admin.register(Order)
-class OrderModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'date', 'status']
-
-
+  
 """
 @admin.register(OrderDetails)
 class OrderDetailsModelAdmin(admin.ModelAdmin):
@@ -35,4 +29,19 @@ class OrderDetailsModelAdmin(admin.ModelAdmin):
 
 @admin.register(Cart)
 class CartModelAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user']
+
+@admin.register(CartInfo)
+class CartModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'items', 'quantity']
+
+@admin.register(Order)
+class OrderModelAdmin(admin.ModelAdmin):
+    list_display = ['id', 'cartid','user']
+
+
+
+@admin.register(OrderInfo)
+class OrderModelAdmin(admin.ModelAdmin):
+    list_display = ['id','orderid','user', 'date', 'status']
+

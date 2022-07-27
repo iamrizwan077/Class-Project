@@ -67,12 +67,8 @@ STATUS_CHOICE = (
     ("Cancel", "Cancel"),
 )
 
-
-
-    #def __str__(self):
-    # return self.user + str(self.date)
-
-
+#def __str__(self):
+# return self.user + str(self.date)
 """
 class OrderDetails(models.Model):
     orderid = models.ForeignKey(Order, on_delete=models.CASCADE)
@@ -86,21 +82,32 @@ class OrderDetails(models.Model):
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class CartInfo(models.Model):
+    cartid = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     items = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-      return self.items.foodname
+        return self.items.foodname
+
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cartid = models.ForeignKey(Cart, on_delete=models.CASCADE)
+
+
+class OrderInfo(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    orderid = models.ForeignKey(Order, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(choices=STATUS_CHOICE,
                               default="Pending",
                               max_length=30)
-    cartid=models.ForeignKey(Cart,on_delete=models.CASCADE)  
-    def __str__(self):
-      return str(self.id)
+    #cartid=models.ForeignKey(Cart,on_delete=models.CASCADE)
+
 
 class UserInfo(models.Model):
     #  user = models.ForeignKey(User, on_delete=models.CASCADE,default="1")
