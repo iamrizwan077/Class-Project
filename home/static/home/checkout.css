@@ -24,6 +24,7 @@ input {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     outline: none;
+    width: 25rem;
     border: 0.15rem solid #cdcfd0;
 }
 
@@ -93,6 +94,7 @@ label {
     display: flex;
     justify-content: space-between;
     font-size: 1.4rem;
+    margin: 1rem 0 1rem 0;
 }
 
 .orderItemSeperator {
@@ -122,6 +124,8 @@ label {
 
 .seperator {
     border-bottom: 0.2rem solid #e3e7e8;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
 }
 
 .paymentHeader {
@@ -130,8 +134,14 @@ label {
 
 /* Payment Section */
 
+.cod {
+    margin: 1rem 0 1rem 0;
+}
+
 #cod {
     cursor: pointer;
+    width: 2rem;
+    height: 1.5rem;
     /* width: 2rem; */
 }
 
@@ -142,6 +152,7 @@ label {
 .terms-conditions {
     font-family: 'Poppins', sans-serif;
     font-size: 1.3rem;
+    line-height: 2rem;
 }
 
 .placeOrderBtn {
@@ -162,6 +173,14 @@ label {
     border-radius: 0.3rem;
     font-family: 'Poppins';
 }
+
+/* #hiddenBtn {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+} */
 
 @media(max-width:992px) {
     .checkoutContainer {
@@ -184,6 +203,9 @@ label {
     .placeOrderBtn button {
         width: 100%;
     }
+    .checkoutHeader p {
+        font-size: 3rem;
+    }
 }
 
 @media(max-width:374px) {
@@ -192,5 +214,8 @@ label {
     }
     .orderItemSeperator {
         display: block;
+    }
+    input {
+        width: 15rem;
     }
 }

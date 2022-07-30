@@ -76,6 +76,11 @@
     font-size: 1.3rem;
 }
 
+#termsCheckbox {
+    width: 3rem !important;
+    height: 1.5rem;
+}
+
 #registerNow {
     height: 4rem;
     width: 100%;

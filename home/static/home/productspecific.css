@@ -66,7 +66,6 @@
 
 #addToCart {
     background-color: lightseagreen;
-    margin-right: 1.5rem;
 }
 
 #buyNow {
@@ -102,5 +101,8 @@
     #productName {
         display: inline;
         margin: 2rem auto;
+    }
+    #firstImg {
+        width: 30rem !important;
     }
 }

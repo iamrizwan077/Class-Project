@@ -220,7 +220,7 @@
           document.getElementById("amtwithshipping").innerText = data.totalamount;
         }
       })
-})
+    })
 
       $('.subtractQty').click(function(){
       var id = $(this).attr("pid").toString();
@@ -239,9 +239,9 @@
           document.getElementById("amtwithshipping").innerText = data.totalamount;
         }
       })
-})
+    })
 
-$('.removeItemFromCart').click(function(){
+    $('.removeItemFromCart').click(function(){
       var id = $(this).attr("pid").toString();
       var eml = this
       console.log(id)
@@ -259,7 +259,28 @@ $('.removeItemFromCart').click(function(){
           eml.parentNode.parentNode.parentNode.remove()
         }
       })
-})
+    })
+    $('.newsLetterBtn').click(function(){
+      var personEmail = $('.newsLetterInput').val();
+      var successMsg = $('.emailSuccess')
+      console.log(personEmail)
+      $.ajax({
+        type:"GET",
+        url:"mail",
+        data:{
+          email: personEmail
+        },
+        success: function(data){
+          console.log("success")
+          
+          console.log(successMsg)
+          successMsg.textContent="Done"
+          alert("Email sent successfully")          
+          console.log(successMsg.textContent)
+         // document.querySelector('emailSuccess').innerHTML= 'Email sent successfully.'
+        }
+      })
+    })
   
 </script>
 

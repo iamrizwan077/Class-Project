@@ -86,14 +86,18 @@
         <!-- Newsletter left -->
         <div class="newsLetterLeft">
             <h1 class="newsLetterHeader">Join our newsletter and get 20% off</h1>
-            <p class="newsLetterPara">Subscribe to our newsletter and stay up to date on our latest releases and promotions.</p>
+            <p class="newsLetterPara">Subscribe to our newsletter and stay up to date on our latest releas+es and promotions.</p>
         </div>
         <!-- Newsletter right -->
+        
+        
         <div class="newsLetterRight">
-            <i class="fa-solid fa-envelope newsLetterIcon"></i>
-            <input type="email" class="newsLetterInput" placeholder="Enter your email">
-            <button class="newsLetterBtn">Subscribe</button>
+            <i class="fa-solid fa-envelope newsLetterIcon"></i>        
+            <input type="email" name="subscribe" class="newsLetterInput" placeholder="Enter your email">
+           <!-- <a href="{% url 'sendmail' %}">--><button class="newsLetterBtn">Subscribe</button><!--</a><button class="newsLetterBtn">Subscribe</button>-->
+            <div class="emailSuccess"></div>
         </div>
+         
     </section>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

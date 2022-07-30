@@ -3,13 +3,20 @@
 
 {% block body %}
 
-<h1>Profile</h1>
-<div><strong>Username: </strong>{{user}}</div>
-<div><strong>Email: </strong>{{user.email}}</div>
-<div><strong>Date Joined: </strong>{{user.date_joined}}</div>
-
-
-
+<section class="changePassword">
+        <div class="leftcp">
+            <div class="border">
+                <p>Welcome {{user}}</p>
+                <button>Profile</button>
+            </div>
+        </div>
+        <div class="rightcp">
+            <p class="rightcpheader">Profile</p>
+            <p class="profileDetails"><span>Username:</span> {{user}}</p>
+            <p class="profileDetails"><span>Email:</span> {{user.email}}</p>
+            <p class="profileDetails"><span>Date Joined:</span> {{user.date_joined}}</p>
+        </div>
+</section>
 
 
 

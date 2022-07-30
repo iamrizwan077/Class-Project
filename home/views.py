@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from .forms import RegisterForm, UserInfoForm
 from .models import User, Category, Product, Order, Cart, OrderInfo, CartInfo, UserInfo
 from django.contrib.auth import authenticate
@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.views import View
 from django.contrib import messages
 from django.db.models import Q
+from django.core.mail import send_mail as sm
+from django.db import connection
 
 
 # Create your views here.
@@ -18,9 +20,10 @@ class ProductView(View):
     def get(self, request, data=None):
         if data == None:
             products = Product.objects.all()
+            print(products.query)
         elif data == 1 or data == 2 or data == 3:
             products = Product.objects.filter(foodcategory=data)
-
+            print(products.query)
         return render(request, 'home/products.html', {'products': products})
 
 
@@ -261,6 +264,7 @@ class OrdersView(View):
         # for i in range(0,len(checkout)):
         #  checkout[i].items.foodname
         order_id = order.id
+        status = orderinfo.status
         #  cartlater = Cart.objects.filter(user=user)
         #  cartlater.delete()
 
@@ -269,7 +273,8 @@ class OrdersView(View):
                 'user': str(user).title(),
                 'orderid': order_id,
                 'incheckout': checkout,
-                'total_price': total_price + 3
+                'total_price': total_price + 3,
+                'status': status
             })
         #            return render(request, 'home/orders.html',{'form':form})
         # else:
@@ -303,3 +308,17 @@ def profile(request):
             #   'userinfo': userinfo,
             'user': user
         })
+
+
+def send_mail(request):
+    person = request.GET['email']
+    print(person)
+    res = sm(
+        subject="Thanks for subscribing to our newletter",
+        message=
+        "Thanks for subscribing to our newsletter. We will keep you updated about discounts.",
+        from_email='foodlo.mail.pk@gmail.com',
+        recipient_list=[person],
+        fail_silently=False)
+    print(res)
+    return HttpResponse(f"Email sent to {res} members.")
